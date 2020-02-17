@@ -1,0 +1,64 @@
+> npm i -g @angular/cli    //// install package angular (-g global )
+use GIt bush it folder where we gonna add the project by
+> git init
+> ng new tasks             //// creat a new project in our choosen direction
+> ng serve -o             //// start the server in the created project
+> json-server --watch db.json --port 5000    /// run json in port 5000
+
+bootstrap dn for html css > <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+font for svg >   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+
+>  ng g c components/navbar      //// generate components navigation bar
+>  ng g c components/tasks     //// generate components 2  for task
+
+we shud o to src/app/components/navber and edit navbar.component.html to put the code there for example the bootstrap
+ by usin b4-navbar ( to get boostrap example )
+if we go to app.component.html we delete the code and replace it with <app-navbar></app-navbar>  for the html we put in navbar.component
+
+for tsk one since we want to use rows we can try ( .row>.col-md-6*2 ) to create that twice
+button.btn.btn-dark.btn-sm>i.fa.fa-plus+{New Task}  create a buton with icon + and New task message
+create row with margin (.row>.col-md-6.mx-auto)
+create formular ( .form-group>label+input.form-control)
+we can use (b4-form-checkbox)to generate a form
+creat a button as large as the form ( button.btn.btn-success.btn-block>i.fa.fa-plus+{New Task} )
+
+> ng g s services/task      ///// to englobe the services
+
+we need to add in app.module.ts
+
+import {HttpClientModule } from '@angular/common/http';   /// import the http module
+import { FormsModule } from '@angular/forms'; 
+
+and HttpClientModule,
+    FormsModule
+in import:[]
+
+then in task.service.ts
+
+   constructor(private http:HttpClient)
+   and findAll(){
+    return this.http.get('http://localhost:5000/tasks');
+  }                                                                     ///// function to get all tasks
+
+after we go to task.component.ts
+
+   constructor(private taskService:TaskService)
+
+
+  ps : we need to creat task model > ng g i models/task  
+go to tsk.ts to put our veriables like ( id?: number;    label: String;    completed: boolean; ) (?: means optional)
+
+             
+> *ngFor="let task of tasks"   in out html of task as a loop to get all the tasks
+
+bootstarp for thmbs up i.fa.fa-thumbs-up
+> [ngClass] for condition like completed true or false ( <i class="fa" [ngClass]="{
+                        'fa-thumbs-up': task.completed,
+                        'fa-thumbs-down': !task.completed
+                }"></i> )
+
+bootstarp button button.btn.btn-warning.btn-sm>i.fa.fa-pencil
+
+> {{myTask | json}}    //// to check json code 
